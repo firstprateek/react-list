@@ -29,33 +29,41 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.scss$/,
+                test: /\.(scss|css)$/,
                 use: [
                     'style-loader', 'css-loader', 'sass-loader'
                 ]
             },
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: ['@babel/preset-env', '@babel/preset-react']
                     }
                 }
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.(png|jp(e*)g|svg|gif)$/,
+                use: ['file-loader'],
                 type: 'asset/resource'
-            }
+            },
+            {
+                test: /\.svg$/,
+                use: ['@svgr/webpack'],
+            },
         ]
+    },
+    resolve: {
+        extensions: ['.*', '.js', '.jsx'],
     },
     // plugins
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Webpack App',
             filename: 'index.html',
-            template: 'src/template.html'
+            template: path.resolve(__dirname, 'src/template.html')
         }),
         new BundleAnalyzerPlugin()
     ]

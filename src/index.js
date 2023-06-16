@@ -1,13 +1,13 @@
-import './styles/main.scss';
-import Bananas from './assets/Bananas.svg';
-import helloWorld from './helloWorld';
+import React from 'react';
+import {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
+import App from './App'
 
-const img = document.createElement('img');
-img.src = Bananas;
-document.body.append(img);
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
 
-const p = document.createElement('p');
-p.textContent = helloWorld();
-document.body.append(p);
-
-console.log("Hello World!");
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
